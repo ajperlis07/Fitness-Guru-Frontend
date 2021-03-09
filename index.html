@@ -3,9 +3,57 @@
   <head>
     <meta charset="utf-8" />
     <title> Fitness Guru </title>
-    <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript" src="index.js" defer></script>
+    <script type="text/javascript" src="modal.js" defer></script>
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
+    <main>
+      <aside>
+        <h1>Fitness Guru</h1>
+        <h2>Routines</h2>
+        <ul id="routines-list" class="side-list">
+          <!-- Add routines Here -->
+        </ul>
+        <h2>Build A Body</h2>
+        <ul id="bab-locker" class="side-list">
+          <li class="item" id="bab-routine" data-action="new">
+            Create a new routine
+          </li>
+          <li class="item" id="bab-workout" data-action="add">
+            Add a workout to a routine
+          </li>
+        </ul>
+      </aside>
+      <section>
+        <div id="exercise-card">
+          <img src="./assets/image-placeholder.jpg" alt="[exercise title]">
+          <h1>[exercise title]</h1>
+          <p class="notes">
+            [workout notes]
+          </p>
+        </div>
+      </section>
+    </main>
+    <div id="modal2" style="display: none;" data-action="close">
+      <form id="workout-form" data-id="[workout id]">
+        <h1>Add Workout</h1>
+        <label for="routine">Routine</label>
+        <input type="text" name="routine name" >
+        <label for="exercise">Exercise</label>
+        <input type="text" name="exercise name" >
+        <label for="notes">Notes</label>
+        <input type="text" name="notes" >
+        <input type="submit" value="create new workout">
+      </form>
+    </div>
+    <div id="modal" style="display: none;" data-action="close">
+      <form id="new-routine-form">
+        <h1>Create New Routine</h1>
+        <label for="name">Name</label>
+        <input type="text" name="name">
+        <input type="submit" value="Create Routine">
+      </form>
+    </div>
   </body>
 </html>
