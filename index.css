@@ -44,6 +44,8 @@
   /* sidebar */
   aside {
     grid-area: nav;
+    padding: 2rem;
+    background-color: rgb(37, 101, 161);
   }
   
   aside h1 {
@@ -81,21 +83,13 @@
   aside li.item:hover {
     background-color: #fae8b9;
   }
-  
-  aside li.item.winner:after {
-    content: "winner";
-    border-radius: 1em;
-    background-color: #facc57;
-    height: 1.5rem;
-    padding: 0 1em;
-    margin: 0 0.5rem;
-  }
+
   
   /* detail */
   section {
     grid-area: content;
     padding: 2rem;
-    background-color: rgb(255, 237, 194);
+    background-color: rgb(132, 158, 197);
   }
   
   #detail {
