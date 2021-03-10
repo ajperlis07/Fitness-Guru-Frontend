@@ -1,14 +1,19 @@
 const routinesList = document.querySelector("ol#routines-list")
-const routineItem = document.querySelector('li[data-id]')
+const routineItem = document.querySelector('em.routine-item')
 const section = document.querySelector("section")
 const newRoutine= document.querySelector("form#new-routine-form")
+const deleteRoutine= document.querySelector("button.delete-routine")
 
 
 function renderRoutine(routine) {
     const li = document.createElement("li")
 
-    li.textContent = routine.name
+    // li.textContent = routine.name
     li.dataset.id = routine.id
+
+    li.innerHTML= `
+    <em class="routine-item">  ${routine.name} </em> <button class="delete-routine"> Delete Routine </button>
+    `
 
     routinesList.append(li)
 }
@@ -75,4 +80,18 @@ newRoutine.addEventListener("submit", event => {
         newRoutine.reset()
 })
 
+deleteRoutine.addEventListener("click", event => {
+    // const id =event.target.dataset.id
+    const routineEm= event.target.closest("em.routine-item")
+    const id = routineEm.dataset.id
+
+    routineEm.remove()
+
+
+    fetch(`http://localhost:3000/routines/${event.target.dataset.id}`,{
+    method: "DELETE"
+})
+.then(response => response.json())
+.then(routine => renderRoutine(routine))
+})
 renderRoutines()
