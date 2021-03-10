@@ -57,3 +57,22 @@ fetch('http://localhost:3000/routines')
     .then(response => response.json())
     .then(routine => renderRoutines(routine))
 
+newRoutine.addEventListener("submit", event => {
+    event.preventDefault()
+    const name= event.target[0].value
+
+    fetch('http://localhost:3000/routines', {
+        method: "POST",
+        headers:
+        {
+            'Content-Type': "application/json",
+            'Accept': "application/json"
+        },
+            body: JSON.stringify({name})
+        })
+        .then(response => response.json())
+        .then(routine => renderRoutine(routine))
+        newRoutine.reset()
+})
+
+renderRoutines()

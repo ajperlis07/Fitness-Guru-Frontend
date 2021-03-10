@@ -81,7 +81,7 @@
   }
   
   aside li.item:hover {
-    background-color: #fae8b9;
+    background-color: rgb(37, 101, 161);
   }
 
   
@@ -137,14 +137,14 @@
   }
   
   #new-routine-form {
-    background-color: rgb(255, 237, 194);
+    background-color: rgb(148, 236, 145);
     margin-top: 20vh;
     width: 600px;
     margin: 20vh auto 0;
   }
 
   #workout-form {
-    background-color: rgb(255, 237, 194);
+    background-color: rgb(148, 236, 145);
     margin-top: 20vh;
     width: 600px;
     margin: 20vh auto 0;
