@@ -127,7 +127,7 @@ workoutForm.addEventListener('submit', event => {
             body: JSON.stringify({routine_id: routines, exercise_id: exercises, notes: newNotes})
     })
         .then(res => res.json())
-        // .then(routine => 
+        .then(newWorkout => console.log(newWorkout))
         workoutForm.reset()
 })
 
