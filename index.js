@@ -84,11 +84,10 @@ newRoutine.addEventListener("submit", event => {
 })
 
 
-routineButton.addEventListener('click', function(event) {
-    event.preventDefault()
-    const select = document.createElement('select');
-    select.name = "routine-Id-List" 
-    select.id = "routine-Id-List"
+function makeRoutineDropdown() {
+    const select = document.getElementById('routine-select');
+    // select.name = "routine-Id-List" 
+    // select.id = "routine-Id-List"
     fetch('http://localhost:3000/routines')
     .then(res => res.json())
     .then(routineObject => {
@@ -102,12 +101,39 @@ routineButton.addEventListener('click', function(event) {
             option.id = routine.id 
             option.textContent = routine.name
 
-            routineButton.append(select)
+            // routineButton.append(select)
             select.append(option)
 
         })
     })
-})
+}
+
+function makeExerciseDropdown() {
+    const select = document.getElementById('exercise-select');
+    // select.name = "routine-Id-List" 
+    // select.id = "routine-Id-List"
+    fetch('http://localhost:3000/exercises')
+    .then(res => res.json())
+    .then(exerciseObject => {
+        exerciseObject.forEach(function (exercise){
+            // const div = document.createElement('select');
+            // select.name = "routine-Id-List" 
+            // select.id = "routine-Id-List"
+
+            const option = document.createElement('option');
+            option.value = exercise.id
+            option.id = exercise.id 
+            option.textContent = exercise.title
+
+            // routineButton.append(select)
+            select.append(option)
+
+        })
+    })
+}
+
+makeRoutineDropdown()
+makeExerciseDropdown()
 
 
 
