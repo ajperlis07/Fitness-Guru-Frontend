@@ -2,7 +2,10 @@ const routinesList = document.querySelector("ol#routines-list")
 const routineItem = document.querySelector('em.routine-item')
 const section = document.querySelector("section")
 const newRoutine= document.querySelector("form#new-routine-form")
-const deleteRoutine= document.querySelector("button.delete-routine")
+const routineDropdown = document.querySelector('form#new-routine-form')
+const routineButton = document.querySelector('button#r-dropdown')
+// const deleteRoutine= document.querySelector("button.delete-routine")
+
 
 
 function renderRoutine(routine) {
@@ -81,10 +84,30 @@ newRoutine.addEventListener("submit", event => {
 })
 
 
-document.querySelector("button#r-dropdown").onclick = function (routines) {
-    const routines = 
+routineButton.addEventListener('click', function(event) {
+    event.preventDefault()
+    const select = document.createElement('select');
+    select.name = "routine-Id-List" 
+    select.id = "routine-Id-List"
+    fetch('http://localhost:3000/routines')
+    .then(res => res.json())
+    .then(routineObject => {
+        routineObject.forEach(function (routine){
+            // const div = document.createElement('select');
+            // select.name = "routine-Id-List" 
+            // select.id = "routine-Id-List"
 
-}
+            const option = document.createElement('option');
+            option.value = routine.id
+            option.id = routine.id 
+            option.textContent = routine.name
+
+            routineButton.append(select)
+            select.append(option)
+
+        })
+    })
+})
 
 
 
