@@ -42,19 +42,20 @@ routinesList.addEventListener('click', event => {
                     div.innerHTML = `
                     <h1 class="title">${exercise.title}</h1>
             <img src="${exercise.image}" alt="${exercise.title}">
-            <button class="delete-button"> Delete workout</button>
+            <button class="delete-button"> Delete workout </button>
+            <h3 class='notes'> Notes: ${workout.notes} </h3> 
           <form id="update-notes-form">
             <label for="notes"> Update Notes </label>
             <input type="text" name="notes">
             <input type="submit" value="Update Notes">
           </form>               
           `
-             const ptag = document.createElement("p")
-            ptag.classList.add("notes")
+            //  const ptag = document.createElement("p")
+            // ptag.classList.add("notes")
 
-            ptag.textContent = `Notes: ${workout.notes}`
+            // ptag.textContent = `Notes: ${workout.notes}`
       
-            div.append(ptag)
+            // div.append(ptag)
       
             section.append(div)            
         }
@@ -160,9 +161,9 @@ document.addEventListener('click', event => {
 })
 
 document.addEventListener('submit', event => {
-    if (event.target.className === 'update-notes-form')
+    if (event.target.id === 'update-notes-form'){
     event.preventDefault()
-    const notes = event.target[0].value
+    const notes = event.target.notes.value
     const cardDiv = event.target.closest('div.exercise-card')
     const id= cardDiv.dataset.id
     fetch(`http://localhost:3000/workouts/${id}`, {
@@ -174,8 +175,12 @@ document.addEventListener('submit', event => {
         body: JSON.stringify({ notes })
 })
     .then(res => res.json())
-    .then(updatedNotes => 
-        console.log(updatedNotes))
+    .then(workoutObj =>  {
+        const workoutNotes = cardDiv.querySelector('h3')
+        workoutNotes.innerText = `Notes: ${workoutObj.notes}`
+        event.target.reset()
+    }) 
+    }
 })
 
 
