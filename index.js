@@ -5,7 +5,7 @@ const newRoutine= document.querySelector("form#new-routine-form")
 const routineDropdown = document.querySelector('form#new-routine-form')
 const routineButton = document.querySelector('button#r-dropdown')
 const workoutForm = document.querySelector('form#workout-form')
-
+const deleteButton= document.querySelector("button.delete-button")
 
 
 function renderRoutine(routine) {
@@ -28,33 +28,42 @@ routinesList.addEventListener('click', event => {
         fetch(`http://localhost:3000/routines/${event.target.dataset.id}`)
             .then(res => res.json())
             .then(routineObj => {
+    
                 section.innerHTML = ""
                 routineObj.exercises.forEach(function (exercise) {
                     
 
                     const div = document.createElement("div")
-                    div.dataset.id = exercise.id
+                    div.dataset.id = exercise.workouts.id
 
                     div.classList.add("exercise-card")
 
                     div.innerHTML = `
                     <h1 class="title">${exercise.title}</h1>
             <img src="${exercise.image}" alt="${exercise.title}">
+            <button class="delete-button"> Delete workout</button>
           `
-                    exercise.workouts.forEach(function (workout) {
+                    
+                    // exercise.workouts.forEach(function (workout) {
+                        const workoutArr= exercise.workouts
+                
+                       const workout= workoutArr.find((workout) =>  workout.routine_id === routineObj.id)
+
+                                    
                         const ptag = document.createElement("p")
                         ptag.classList.add("notes")
 
                         ptag.textContent = `Notes: ${workout.notes}`
-
+                    
                         div.append(ptag)
-                    })
+                    
                     section.append(div)
                 })
-            })
-    }
-})
+            
+                })
+            }
 
+        })
 
 
 fetch('http://localhost:3000/routines')
@@ -117,6 +126,8 @@ workoutForm.addEventListener('submit', event => {
     const routines = event.target[0].value
     const exercises = event.target[1].value
     const newNotes = event.target[2].value
+
+    
     fetch('http://localhost:3000/workouts', {
         method: "POST",
         headers:
@@ -130,6 +141,10 @@ workoutForm.addEventListener('submit', event => {
         .then(newWorkout => console.log(newWorkout))
         workoutForm.reset()
 })
+
+// deleteButton.addEventListener('click', event => {
+
+// })
 
 
 makeRoutineDropdown()
