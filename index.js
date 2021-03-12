@@ -45,7 +45,7 @@ routinesList.addEventListener('click', event => {
             <button class="delete-button"> Delete workout </button>
             <h3 class='notes'> Notes: ${workout.notes} </h3> 
           <form id="update-notes-form">
-            <label for="notes"> Update Notes </label>
+            <h4 for="notes"> Update Notes </h4>
             <input type="text" name="notes">
             <input type="submit" value="Update Notes">
           </form>               
