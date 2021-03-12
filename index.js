@@ -5,7 +5,7 @@ const newRoutine= document.querySelector("form#new-routine-form")
 const routineDropdown = document.querySelector('form#new-routine-form')
 const routineButton = document.querySelector('button#r-dropdown')
 const workoutForm = document.querySelector('form#workout-form')
-const deleteButton= document.querySelector("button.delete-button")
+const deleteButton= document.querySelector("button#delete-button")
 
 
 function renderRoutine(routine) {
@@ -28,13 +28,13 @@ routinesList.addEventListener('click', event => {
         fetch(`http://localhost:3000/routines/${event.target.dataset.id}`)
             .then(res => res.json())
             .then(routineObj => {
-    
                 section.innerHTML = ""
-                routineObj.exercises.forEach(function (exercise) {
-                    
-
-                    const div = document.createElement("div")
-                    div.dataset.id = exercise.workouts.id
+                routineObj.exercises.forEach(exercise => {
+                    exercise.workouts.forEach(workout =>{
+                        if(workout.routine_id=== routineObj.id){
+                            const div = document.createElement("div")
+                
+                    div.dataset.id = workout.id
 
                     div.classList.add("exercise-card")
 
@@ -43,21 +43,20 @@ routinesList.addEventListener('click', event => {
             <img src="${exercise.image}" alt="${exercise.title}">
             <button class="delete-button"> Delete workout</button>
           `
-                    
-                    // exercise.workouts.forEach(function (workout) {
-                        const workoutArr= exercise.workouts
-                
-                       const workout= workoutArr.find((workout) =>  workout.routine_id === routineObj.id)
+             const ptag = document.createElement("p")
+            ptag.classList.add("notes")
 
-                                    
-                        const ptag = document.createElement("p")
-                        ptag.classList.add("notes")
+            ptag.textContent = `Notes: ${workout.notes}`
+      
+            div.append(ptag)
+      
+            section.append(div)            
+        }
+                    
+                        return 
+                    })
 
-                        ptag.textContent = `Notes: ${workout.notes}`
                     
-                        div.append(ptag)
-                    
-                    section.append(div)
                 })
             
                 })
@@ -142,10 +141,17 @@ workoutForm.addEventListener('submit', event => {
         workoutForm.reset()
 })
 
-// deleteButton.addEventListener('click', event => {
 
-// })
-
+document.addEventListener('click', event => {
+    if (event.target.className === 'delete-button') {
+        const cardDiv = event.target.closest("div.exercise-card")
+        const id= cardDiv.dataset.id
+        cardDiv.remove()
+        fetch(`http://localhost:3000/workouts/${id}`, {
+            method: 'DELETE'
+        })
+    }
+})
 
 makeRoutineDropdown()
 makeExerciseDropdown()
