@@ -50,13 +50,6 @@ routinesList.addEventListener('click', event => {
             <input type="submit" value="Update Notes">
           </form>               
           `
-            //  const ptag = document.createElement("p")
-            // ptag.classList.add("notes")
-
-            // ptag.textContent = `Notes: ${workout.notes}`
-      
-            // div.append(ptag)
-      
             section.append(div)            
         }
                     
