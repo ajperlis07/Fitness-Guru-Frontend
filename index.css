@@ -135,6 +135,16 @@
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.75);
   }
+
+  /* #modal3 {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+  } */
   
   #new-routine-form {
     background-color: rgb(148, 236, 145);
@@ -149,7 +159,14 @@
     width: 600px;
     margin: 20vh auto 0;
   }
-  
+
+  /* #update-notes-form {
+    background-color: rgb(148, 236, 145);
+    margin-top: 20vh;
+    width: 600px;
+    margin: 20vh auto 0;
+  }
+   */
   /* forms */
   form {
     padding: 1em;

@@ -6,6 +6,7 @@ const routineDropdown = document.querySelector('form#new-routine-form')
 const routineButton = document.querySelector('button#r-dropdown')
 const workoutForm = document.querySelector('form#workout-form')
 const deleteButton= document.querySelector("button#delete-button")
+const updateForm = document.querySelector('form#update-notes-form')
 
 
 function renderRoutine(routine) {
@@ -42,6 +43,11 @@ routinesList.addEventListener('click', event => {
                     <h1 class="title">${exercise.title}</h1>
             <img src="${exercise.image}" alt="${exercise.title}">
             <button class="delete-button"> Delete workout</button>
+          <form id="update-notes-form">
+            <label for="notes"> Update Notes </label>
+            <input type="text" name="notes">
+            <input type="submit" value="Update Notes">
+          </form>               
           `
              const ptag = document.createElement("p")
             ptag.classList.add("notes")
@@ -152,6 +158,26 @@ document.addEventListener('click', event => {
         })
     }
 })
+
+document.addEventListener('submit', event => {
+    if (event.target.className === 'update-notes-form')
+    event.preventDefault()
+    const notes = event.target[0].value
+    const cardDiv = event.target.closest('div.exercise-card')
+    const id= cardDiv.dataset.id
+    fetch(`http://localhost:3000/workouts/${id}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({ notes })
+})
+    .then(res => res.json())
+    .then(updatedNotes => 
+        console.log(updatedNotes))
+})
+
 
 makeRoutineDropdown()
 makeExerciseDropdown()

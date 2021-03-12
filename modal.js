@@ -19,3 +19,15 @@ modal2.addEventListener("click", e => {
     modal2.style.display = "none"
   }
 })
+
+// const modal3 = document.querySelector("#modal3")
+// document.addEventListener("click", event => {
+//     if (event.target.className === '.update-button')
+//   modal3.style.display = "block"
+// })
+// // Hide the form
+// modal3.addEventListener("click", e => {
+//   if (e.target.dataset.action === "close") {
+//     modal3.style.display = "none"
+//   }
+// })
